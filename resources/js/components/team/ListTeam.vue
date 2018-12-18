@@ -62,7 +62,7 @@
                         this.$http.delete('team/' + id).then(() => {
                             let index = this.staticData.map(item => item.id).indexOf(id);
                             this.staticData.splice(index, 1);
-                            this.teams = staticData;
+                            this.teams = this.staticData;
                             swal("Team deleted", {
                                 icon: "success",
                             });
