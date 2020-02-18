@@ -35,7 +35,8 @@ class BookController extends Controller
      */
     public function index(Author $author)
     {
-        if (isset($author->id)) {
+
+        if ($author) {
             $books = $this->repository->getByAuthorId($author->id);
         } else {
             $books = $this->repository->all();
