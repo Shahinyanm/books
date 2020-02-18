@@ -1,20 +1,20 @@
 import VueRouter from 'vue-router'
 
-import ListTeam from "../components/team/ListTeam";
-import CreateTeam from "../components/team/CreateTeam";
-import EditTeam from "../components/team/EditTeam";
-import ListPlayer from "../components/player/ListPlayer";
-import CreatePlayer from "../components/player/CreatePlayer";
-import EditPlayer from "../components/player/EditPlayer";
+import ListAuthor from "../components/author/ListAuthor";
+import CreateAuthor from "../components/author/CreateAuthor";
+import EditAuthor from "../components/author/EditAuthor";
+import ListBook from "../components/book/ListBook";
+import CreateBook from "../components/book/CreateBook";
+import EditBook from "../components/book/EditBook";
 
 const routes = [
-    {path: '/', component: ListTeam},
-    {path: '/team/create', component: CreateTeam},
-    {path: '/team/edit/:id', component: EditTeam},
+    {path: '/', component: ListAuthor},
+    {path: '/author/create', component: CreateAuthor},
+    {path: '/author/edit/:id', component: EditAuthor},
 
-    {path: '/players/:team_id?', component: ListPlayer},
-    {path: '/player/create', component: CreatePlayer},
-    {path: '/player/edit/:id', component: EditPlayer}
+    {path: '/books/:author_id?', component: ListBook},
+    {path: '/book/create', component: CreateBook},
+    {path: '/book/edit/:id', component: EditBook}
 ];
 
 export const router = new VueRouter({

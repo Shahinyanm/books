@@ -14,15 +14,22 @@ class TeamsTableSeeder extends Seeder
         $faker = Faker\Factory::create();
 
         for ($i = 0; $i < 10; $i++) {
-            $team = App\Models\Team::create([
-                'name' => $faker->name
-            ]);
-            for ($k = 0; $k < 5; $k++) {
-                App\Models\Player::create([
-                    'first_name' => $faker->firstName,
-                    'last_name' => $faker->lastName,
-                    'team_id' => $team->id,
-                ]);
+            $author = App\Models\Author::create(
+                [
+                    'name' => $faker->name
+                ]
+            );
+
+
+            for ($k = 0; $k < 25; $k++) {
+                App\Models\Book::create(
+                    [
+                        'title' => $faker->firstName,
+                        'published_at' => now()->subDays(rand(0, 730)),
+                        'author_id' => $author->id,
+                        'genre_id' => rand(1,22),
+                    ]
+                );
             }
         }
     }

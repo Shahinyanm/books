@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Team;
+namespace App\Http\Requests\Book;
 
 use App\Helpers\StatusCodeHelper;
-use App\Models\Team;
+use App\Models\Author;
+use App\Models\Genre;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
@@ -28,7 +29,10 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255|unique:'.(new Team())->getTable().',name',
+            'title' => 'required|max:255',
+            'published_at' => 'before:today',
+            'author_id' => 'required|exists:' . (new Author())->getTable() . ',id',
+            'genre_id' => 'required|exists:' . (new Genre())->getTable() . ',id',
         ];
     }
 

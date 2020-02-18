@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\StatusCodeHelper;
+use App\Http\Requests\Genre\CreateRequest;
+use App\Models\Genre;
+use App\Repositories\GenreRepository;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Team\CreateRequest;
-use App\Http\Requests\Team\EditRequest;
-use App\Models\Team;
-use App\Repositories\TeamRepository;
 use Response;
 
-class TeamController extends Controller
+
+class GenreController extends Controller
 {
     private $statusCode;
     private $success;
@@ -24,40 +25,40 @@ class TeamController extends Controller
         $this->success = false;
         $this->data = [];
         $this->errors = [];
-        $this->repository = new TeamRepository();
+        $this->repository = new GenreRepository();
     }
 
     /**
-     * Get all teams
+     * Display a listing of the resource.
      *
-     * @return mixed
+     * @return Response
      */
     public function index()
     {
-        $this->data['teams'] = $this->repository->all();
+        $this->data[ 'genres' ] = $this->repository->all();
         $this->success = true;
         $this->statusCode = StatusCodeHelper::HTTP_OK;
         return Response::api($this->success, $this->data, $this->errors, $this->statusCode);
     }
 
     /**
-     * Get one team
+     * Display the specified resource.
      *
-     * @param Team $team
-     * @return mixed
+     * @param  Genre  $genre
+     * @return Response
      */
-    public function show(Team $team)
+    public function show(Genre $genre)
     {
-        $this->data['team'] = $team;
+        $this->data[ 'genre' ] = $genre;
         $this->success = true;
         $this->statusCode = StatusCodeHelper::HTTP_OK;
         return Response::api($this->success, $this->data, $this->errors, $this->statusCode);
     }
 
     /**
-     * Create team
+     * Create author
      *
-     * @param CreateRequest $request
+     * @param  CreateRequest  $request
      * @return mixed
      */
     public function create(CreateRequest $request)
@@ -70,18 +71,19 @@ class TeamController extends Controller
         return Response::api($this->success, $this->data, $this->errors, $this->statusCode);
     }
 
+
     /**
-     * Edit team
+     * Update the specified resource in storage.
      *
-     * @param EditRequest $request
-     * @param Team $team
-     * @return mixed
+     * @param  Request  $request
+     * @param  Genre    $genre
+     * @return Response
      */
-    public function edit(EditRequest $request, Team $team)
+    public function update(Request $request, Genre $genre)
     {
-        $model = $this->repository->edit($team, $request->all());
+        $model = $this->repository->edit($genre, $request->all());
         if ($model) {
-            $this->data['team'] = $team;
+            $this->data[ 'genre' ] = $genre;
             $this->success = true;
             $this->statusCode = StatusCodeHelper::HTTP_CREATED;
         }
@@ -89,19 +91,19 @@ class TeamController extends Controller
     }
 
     /**
-     * Delete team
+     * Remove the specified resource from storage.
      *
-     * @param Team $team
-     * @return mixed
+     * @param  Genre  $genre
+     * @return Response
      */
-    public function delete(Team $team)
+    public function destroy(Genre $genre)
     {
-        $model = $this->repository->delete($team);
+        $model = $this->repository->delete($genre);
         if ($model) {
             $this->success = true;
             $this->statusCode = StatusCodeHelper::HTTP_OK;
         } else {
-            $this->errors['team'] = "can't_delete_team";
+            $this->errors['genre'] = "can't_delete_genre";
         }
         return Response::api($this->success, $this->data, $this->errors, $this->statusCode);
     }

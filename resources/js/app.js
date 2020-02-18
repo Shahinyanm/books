@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 import {router} from "./router/router";
 
 const apiConfigs = axios.create({
-    baseURL: 'http://test-team-player.loc/api/'
+    baseURL: 'http://pixel.test/api/'
 });
 
 Vue.prototype.$http = apiConfigs;

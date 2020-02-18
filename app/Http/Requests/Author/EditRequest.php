@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Player;
+namespace App\Http\Requests\Author;
 
 use App\Helpers\StatusCodeHelper;
-use App\Models\Team;
+use App\Models\Author;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class CreateRequest extends FormRequest
+class EditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,9 +28,7 @@ class CreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
-            'team_id' => 'required|exists:' . (new Team())->getTable() . ',id',
+            'name' => 'required|max:255|unique:' . (new Author())->getTable() . ',name,' . $this->route('author')->id,
         ];
     }
 

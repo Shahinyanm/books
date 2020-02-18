@@ -14,21 +14,20 @@ use Illuminate\Http\Request;
 */
 
 Route::namespace('Api')->group(function() {
-    //Teams
-    Route::get('teams', 'TeamController@index');
-    Route::prefix('team')->group(function () {
-        Route::get('/{team}', 'TeamController@show');
-        Route::post('create', 'TeamController@create');
-        Route::post('{team}', 'TeamController@edit');
-        Route::delete('{team}', 'TeamController@delete');
+    Route::get('genres', 'GenreController@index');
+    Route::get('authors', 'AuthorController@index');
+    Route::prefix('author')->group(function () {
+        Route::get('/{author}', 'AuthorController@show');
+        Route::post('create', 'AuthorController@create');
+        Route::post('{author}', 'AuthorController@edit');
+        Route::delete('{author}', 'AuthorController@delete');
     });
 
-    //Players
-    Route::get('players/{team?}', 'PlayerController@index');
-    Route::prefix('player')->group(function () {
-        Route::get('/{player}', 'PlayerController@show');
-        Route::post('create', 'PlayerController@create');
-        Route::post('{player}', 'PlayerController@edit');
-        Route::delete('{player}', 'PlayerController@delete');
+    Route::get('books/{author?}', 'BookController@index');
+    Route::prefix('book')->group(function () {
+        Route::get('/{book}', 'BookController@show');
+        Route::post('create', 'BookController@create');
+        Route::post('{book}', 'BookController@edit');
+        Route::delete('{book}', 'BookController@delete');
     });
 });
